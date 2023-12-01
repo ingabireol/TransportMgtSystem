@@ -123,7 +123,7 @@ private void addTableColumnsHeader(){
         ));
         jScrollPane2.setViewportView(CustomerTable);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 10, 550, -1));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 10, 740, 460));
 
         registerBtn.setText("Register");
         registerBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -175,7 +175,7 @@ private void addTableColumnsHeader(){
 
         jScrollPane1.setViewportView(jPanel1);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1186, 722));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1590, 950));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -291,6 +291,7 @@ private void addTableColumnsHeader(){
             lnameTxt.setText(customer.getCust_last_name());
             genderCombo.setSelectedItem(customer.getGender());
             contactTxt.setText(customer.getCust_phone());
+            registerBtn.setEnabled(false);
 
             // Optional: You can perform additional actions if needed
         }

@@ -64,7 +64,7 @@ public class EmployeeDao {
         }
         return null;        
     }
-    public String generate_empId(Employee emp){
+    public String generate_empId(){
         
         try{
             Connection con = DriverManager.getConnection(db_url, username1, passwd1);
@@ -139,7 +139,7 @@ public class EmployeeDao {
         public Employee searchEmployee(Employee emp) {
         try{
             Connection con = DriverManager.getConnection(db_url, username1, passwd1);
-            String sql = "select * from employee where employee_id = ?";
+            String sql = "select * from employee where emp_id = ?";
             
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setString(1, emp.getEmp_id());

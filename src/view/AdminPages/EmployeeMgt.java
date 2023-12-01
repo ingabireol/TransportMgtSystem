@@ -11,6 +11,7 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
 import model.Employee;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -27,6 +28,8 @@ public class EmployeeMgt extends javax.swing.JInternalFrame {
         ui.setNorthPane(null);
         addTableColumnsHeader();
         addTableRowData();
+        EmployeeDao dao = new EmployeeDao();
+        empIdTxt.setText(dao.generate_empId());
     }
 
     
@@ -72,7 +75,6 @@ public class EmployeeMgt extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -80,22 +82,23 @@ public class EmployeeMgt extends javax.swing.JInternalFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jPasswordField2 = new javax.swing.JPasswordField();
+        fnameTxt = new javax.swing.JTextField();
+        lnameTxt = new javax.swing.JTextField();
+        salaryTxt = new javax.swing.JTextField();
+        roleTxt = new javax.swing.JTextField();
+        usernameTxt = new javax.swing.JTextField();
+        passwordTxt = new javax.swing.JPasswordField();
+        confirmPasswordTxt = new javax.swing.JPasswordField();
         jScrollPane2 = new javax.swing.JScrollPane();
         EmployeeTable = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jTextField7 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        registerBtn = new javax.swing.JButton();
+        deleteBtn = new javax.swing.JButton();
+        updateBtn = new javax.swing.JButton();
+        searchBtn = new javax.swing.JButton();
+        searchIdTxt = new javax.swing.JTextField();
+        empIdTxt = new javax.swing.JLabel();
+        phoneTxt = new javax.swing.JTextField();
+        resetBtn = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 235, 216));
 
@@ -108,10 +111,7 @@ public class EmployeeMgt extends javax.swing.JInternalFrame {
         jLabel4.setText("Last Name");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 151, -1, -1));
 
-        jLabel5.setText("Date of birth");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 200, -1, -1));
-
-        jLabel6.setText("Gender");
+        jLabel6.setText("Phone");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 232, -1, -1));
 
         jLabel7.setText("Employee Id");
@@ -131,19 +131,19 @@ public class EmployeeMgt extends javax.swing.JInternalFrame {
 
         jLabel12.setText("Confirm Password");
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 506, -1, -1));
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(209, 86, 130, -1));
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(209, 148, 130, -1));
-        jPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(209, 289, 16, -1));
+        jPanel1.add(fnameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 90, 130, -1));
+        jPanel1.add(lnameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 150, 130, 30));
+        jPanel1.add(salaryTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 280, 130, -1));
 
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+        roleTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
+                roleTxtActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(209, 345, 84, -1));
-        jPanel1.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(209, 389, 98, -1));
-        jPanel1.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(209, 471, 216, -1));
-        jPanel1.add(jPasswordField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(209, 506, 216, -1));
+        jPanel1.add(roleTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(209, 345, 130, -1));
+        jPanel1.add(usernameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(209, 389, 130, -1));
+        jPanel1.add(passwordTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(209, 471, 130, -1));
+        jPanel1.add(confirmPasswordTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(209, 506, 130, -1));
 
         EmployeeTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -156,26 +156,63 @@ public class EmployeeMgt extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        EmployeeTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                EmployeeTableMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(EmployeeTable);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 40, 520, -1));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 50, 520, -1));
 
-        jButton1.setText("Register");
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 616, -1, -1));
+        registerBtn.setText("Register");
+        registerBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registerBtnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(registerBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 616, -1, -1));
 
-        jButton2.setText("Delete");
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(209, 616, -1, -1));
+        deleteBtn.setText("Delete");
+        deleteBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteBtnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(deleteBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(209, 616, -1, -1));
 
-        jButton3.setText("Update");
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(354, 616, -1, -1));
+        updateBtn.setText("Update");
+        updateBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateBtnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(updateBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 620, -1, -1));
 
-        jButton4.setText("Search");
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(722, 543, -1, -1));
-        jPanel1.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(819, 546, 118, -1));
+        searchBtn.setText("Search");
+        searchBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchBtnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(searchBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(722, 543, -1, -1));
+        jPanel1.add(searchIdTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(819, 546, 118, -1));
+        jPanel1.add(empIdTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 40, 130, 20));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select", "Male", "Female" }));
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(209, 229, -1, -1));
-        jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(209, 194, -1, -1));
+        phoneTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                phoneTxtActionPerformed(evt);
+            }
+        });
+        jPanel1.add(phoneTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 220, 130, -1));
+
+        resetBtn.setText("Reset");
+        resetBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resetBtnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(resetBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 620, -1, -1));
 
         jScrollPane1.setViewportView(jPanel1);
 
@@ -193,40 +230,228 @@ public class EmployeeMgt extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+    private void roleTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roleTxtActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
+    }//GEN-LAST:event_roleTxtActionPerformed
+
+    private void registerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerBtnActionPerformed
+        // TODO add your handling code here:
+         if (empIdTxt.getText().trim().isEmpty() || fnameTxt.getText().trim().isEmpty() ||
+            lnameTxt.getText().trim().isEmpty() || salaryTxt.getText().trim().isEmpty() ||
+             roleTxt.getText().trim().isEmpty() ||
+            usernameTxt.getText().trim().isEmpty() || passwordTxt.getText().trim().isEmpty() ||
+            confirmPasswordTxt.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please Fill All Fields", "Empty Field", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Check if passwords match
+        if (!passwordTxt.getText().equals(confirmPasswordTxt.getText())) {
+            JOptionPane.showMessageDialog(this, "Passwords do not match", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Create an Employee object
+        Employee employee = new Employee();
+        employee.setEmp_id(empIdTxt.getText());
+        employee.setEmp_fname(fnameTxt.getText());
+        employee.setEmp_lname(lnameTxt.getText());
+        employee.setEmp_salary(Float.parseFloat(salaryTxt.getText()));
+        employee.setUsername(usernameTxt.getText());
+        employee.setRole(roleTxt.getText());
+        employee.setPhone(phoneTxt.getText());
+        employee.setPasswd(passwordTxt.getText());
+
+        // Create an EmployeeDao object and perform the registration
+        EmployeeDao employeeDao = new EmployeeDao();
+        String feedback = employeeDao.registerEmployee(employee);
+
+        // Display the registration result
+        JOptionPane.showMessageDialog(this, feedback, "Result", JOptionPane.INFORMATION_MESSAGE);
+
+    }//GEN-LAST:event_registerBtnActionPerformed
+
+    private void phoneTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_phoneTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_phoneTxtActionPerformed
+
+    private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
+        // TODO add your handling code here:
+        if (empIdTxt.getText().trim().isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Please Enter Employee ID", "Empty Field", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    // Confirm with the user before deleting
+    int option = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this employee?", "Confirm Deletion", JOptionPane.YES_NO_OPTION);
+    
+    if (option == JOptionPane.YES_OPTION) {
+        // Create an EmployeeDao object
+        EmployeeDao employeeDao = new EmployeeDao();
+        
+        // Create an Employee object with the ID to be deleted
+        Employee employee = new Employee();
+        employee.setEmp_id(empIdTxt.getText());
+
+        // Perform the deletion
+        String feedback = employeeDao.deleteEmployee(employee);
+
+        // Display the deletion result
+        JOptionPane.showMessageDialog(this, feedback, "Result", JOptionPane.INFORMATION_MESSAGE);
+        addTableRowData();
+        resetBtnActionPerformed(evt);;
+    }
+    
+    }//GEN-LAST:event_deleteBtnActionPerformed
+
+    private void resetBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetBtnActionPerformed
+        // TODO add your handling code here:
+        empIdTxt.setText("");
+        fnameTxt.setText("");
+        lnameTxt.setText("");
+        salaryTxt.setText("");
+        roleTxt.setText("");
+        usernameTxt.setText("");
+        passwordTxt.setText("");
+        confirmPasswordTxt.setText("");
+        phoneTxt.setText("");
+        registerBtn.setEnabled(true);
+        EmployeeDao dao = new EmployeeDao();
+        empIdTxt.setText(dao.generate_empId());
+    }//GEN-LAST:event_resetBtnActionPerformed
+
+    private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
+        // TODO add your handling code here:
+            if (empIdTxt.getText().trim().isEmpty() || fnameTxt.getText().trim().isEmpty() ||
+           lnameTxt.getText().trim().isEmpty() || salaryTxt.getText().trim().isEmpty() ||
+           roleTxt.getText().trim().isEmpty() || usernameTxt.getText().trim().isEmpty() ||
+           passwordTxt.getText().trim().isEmpty() || confirmPasswordTxt.getText().trim().isEmpty()) {
+           JOptionPane.showMessageDialog(this, "Please Fill All Fields", "Empty Field", JOptionPane.ERROR_MESSAGE);
+           return;
+       }
+
+       // Check if passwords match
+       if (!passwordTxt.getText().equals(confirmPasswordTxt.getText())) {
+           JOptionPane.showMessageDialog(this, "Passwords do not match", "Error", JOptionPane.ERROR_MESSAGE);
+           return;
+       }
+
+       // Create an Employee object
+       Employee employee = new Employee();
+       employee.setEmp_id(empIdTxt.getText());
+       employee.setEmp_fname(fnameTxt.getText());
+       employee.setEmp_lname(lnameTxt.getText());
+       employee.setEmp_salary(Float.parseFloat(salaryTxt.getText()));
+       employee.setUsername(usernameTxt.getText());
+       employee.setRole(roleTxt.getText());
+       employee.setPhone(phoneTxt.getText());
+       employee.setPasswd(passwordTxt.getText());
+
+       // Create an EmployeeDao object and perform the update
+       EmployeeDao employeeDao = new EmployeeDao();
+       String feedback = employeeDao.updateEmployee(employee);
+
+       // Display the update result
+       JOptionPane.showMessageDialog(this, feedback, "Result", JOptionPane.INFORMATION_MESSAGE);
+
+    }//GEN-LAST:event_updateBtnActionPerformed
+
+    private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
+        // TODO add your handling code here:
+        if (searchIdTxt.getText().trim().isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Please Enter Employee ID", "Empty Field", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    // Create an EmployeeDao object
+    EmployeeDao employeeDao = new EmployeeDao();
+
+    // Create an Employee object with the ID to be searched
+    Employee employee = new Employee();
+    employee.setEmp_id(searchIdTxt.getText());
+
+    // Perform the search
+    employee = employeeDao.searchEmployee(employee);
+
+    if (employee == null) {
+        JOptionPane.showMessageDialog(this, "Employee ID does not Exist", "Result", JOptionPane.INFORMATION_MESSAGE);
+    } else {
+        // Display the employee information in the form fields
+        fnameTxt.setText(employee.getEmp_fname());
+        lnameTxt.setText(employee.getEmp_lname());
+        salaryTxt.setText(String.valueOf(employee.getEmp_salary()));
+        roleTxt.setText(employee.getRole());
+        usernameTxt.setText(employee.getUsername());
+        passwordTxt.setText(employee.getPasswd());
+        confirmPasswordTxt.setText(employee.getPasswd());  // Assuming you have confirmPasswordTxt
+        phoneTxt.setText(employee.getPhone());  // Assuming you have phoneTxt
+    }
+    }//GEN-LAST:event_searchBtnActionPerformed
+
+    private void EmployeeTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EmployeeTableMouseClicked
+        // TODO add your handling code here:
+        int selectedRow = EmployeeTable.getSelectedRow();
+
+    // Check if a row is selected
+    if (selectedRow == -1) {
+        JOptionPane.showMessageDialog(this, "Please select an employee from the table", "No Selection", JOptionPane.INFORMATION_MESSAGE);
+        return;
+    }
+
+    // Get the values from the selected row
+    String empId = EmployeeTable.getValueAt(selectedRow, 0).toString();
+    String fname = EmployeeTable.getValueAt(selectedRow, 1).toString();
+    String lname = EmployeeTable.getValueAt(selectedRow, 2).toString();
+    String salary = EmployeeTable.getValueAt(selectedRow, 4).toString();
+    String phone = EmployeeTable.getValueAt(selectedRow, 3).toString();
+    String role = EmployeeTable.getValueAt(selectedRow, 6).toString();
+    String username = EmployeeTable.getValueAt(selectedRow, 7).toString();
+    String password = EmployeeTable.getValueAt(selectedRow, 5).toString();
+    // Add more columns as needed
+
+    // Display the values in the form fields
+    empIdTxt.setText(empId);
+    fnameTxt.setText(fname);
+    lnameTxt.setText(lname);
+    salaryTxt.setText(salary);
+    phoneTxt.setText(phone);
+    roleTxt.setText(role);
+    usernameTxt.setText(username);
+    passwordTxt.setText(password);
+    confirmPasswordTxt.setText(password); 
+    registerBtn.setEnabled(false);
+    }//GEN-LAST:event_EmployeeTableMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable EmployeeTable;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private javax.swing.JPasswordField confirmPasswordTxt;
+    private javax.swing.JButton deleteBtn;
+    private javax.swing.JLabel empIdTxt;
+    private javax.swing.JTextField fnameTxt;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JPasswordField jPasswordField2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
+    private javax.swing.JTextField lnameTxt;
+    private javax.swing.JPasswordField passwordTxt;
+    private javax.swing.JTextField phoneTxt;
+    private javax.swing.JButton registerBtn;
+    private javax.swing.JButton resetBtn;
+    private javax.swing.JTextField roleTxt;
+    private javax.swing.JTextField salaryTxt;
+    private javax.swing.JButton searchBtn;
+    private javax.swing.JTextField searchIdTxt;
+    private javax.swing.JButton updateBtn;
+    private javax.swing.JTextField usernameTxt;
     // End of variables declaration//GEN-END:variables
 
 }

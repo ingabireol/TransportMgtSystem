@@ -5,14 +5,18 @@
  */
 package view;
 
-import Dao.JourneyDao;
 import java.awt.Color;
+import java.awt.Dimension;
+import javax.swing.Icon;
+import javax.swing.JOptionPane;
+import model.Employee;
 import view.AdminPages.BookTicket;
 import view.AdminPages.BusMgt;
 import view.AdminPages.CreateJourney;
 import view.AdminPages.CustomerMgt;
 import view.AdminPages.DriverMgt;
 import view.AdminPages.EmployeeMgt;
+import view.AdminPages.HomePage;
 
 /**
  *
@@ -28,6 +32,12 @@ public class AdminPage extends javax.swing.JFrame {
         initComponents();
         defaultColor = new Color(236,227,206);
         clickedColor = new Color(79,111,82);
+         HomePage homePage = new HomePage();
+        jDesktopPane.removeAll();
+        Dimension dm  = jDesktopPane.getSize();
+        homePage.setSize(dm);
+        jDesktopPane.add(homePage).setVisible(true);
+        
         
     }
 
@@ -43,8 +53,9 @@ public class AdminPage extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-        CustMgtBtn1 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
+        logOutBtn = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
         ConfPanel = new javax.swing.JPanel();
         HomeBtn = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -67,74 +78,52 @@ public class AdminPage extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(115, 144, 114));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/icons8-bus-100.png"))); // NOI18N
         jLabel7.setText("Transport Management System");
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 30, -1, -1));
 
-        CustMgtBtn1.setBackground(new java.awt.Color(236, 227, 206));
-        CustMgtBtn1.setMaximumSize(new java.awt.Dimension(137, 82));
-        CustMgtBtn1.setMinimumSize(new java.awt.Dimension(137, 82));
-        CustMgtBtn1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/ingabireO lOgo2.png"))); // NOI18N
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, -10, 300, 220));
+
+        logOutBtn.setBackground(new java.awt.Color(236, 227, 206));
+        logOutBtn.setMaximumSize(new java.awt.Dimension(137, 82));
+        logOutBtn.setMinimumSize(new java.awt.Dimension(137, 82));
+        logOutBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                CustMgtBtn1MouseClicked(evt);
+                logOutBtnMouseClicked(evt);
             }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                CustMgtBtn1MousePressed(evt);
+                logOutBtnMousePressed(evt);
             }
         });
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/icons8-customers-80.png"))); // NOI18N
-        jLabel8.setText("Manage Customers");
-        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel8MouseClicked(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel8MousePressed(evt);
-            }
-        });
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/icons8-log-out-100.png"))); // NOI18N
+        jLabel10.setText("LOG OUT");
 
-        javax.swing.GroupLayout CustMgtBtn1Layout = new javax.swing.GroupLayout(CustMgtBtn1);
-        CustMgtBtn1.setLayout(CustMgtBtn1Layout);
-        CustMgtBtn1Layout.setHorizontalGroup(
-            CustMgtBtn1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(CustMgtBtn1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel8)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        javax.swing.GroupLayout logOutBtnLayout = new javax.swing.GroupLayout(logOutBtn);
+        logOutBtn.setLayout(logOutBtnLayout);
+        logOutBtnLayout.setHorizontalGroup(
+            logOutBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, logOutBtnLayout.createSequentialGroup()
+                .addGap(0, 85, Short.MAX_VALUE)
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-        CustMgtBtn1Layout.setVerticalGroup(
-            CustMgtBtn1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(CustMgtBtn1Layout.createSequentialGroup()
+        logOutBtnLayout.setVerticalGroup(
+            logOutBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(logOutBtnLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel8)
+                .addComponent(jLabel10)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(CustMgtBtn1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(204, 204, 204)
-                .addComponent(jLabel7)
-                .addGap(304, 304, 304))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(CustMgtBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addContainerGap(42, Short.MAX_VALUE))
-        );
+        jPanel2.add(logOutBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1590, 20, -1, -1));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1320, 170));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1910, 170));
 
         ConfPanel.setBackground(new java.awt.Color(236, 227, 206));
         ConfPanel.setAutoscrolls(true);
@@ -144,6 +133,9 @@ public class AdminPage extends javax.swing.JFrame {
         HomeBtn.setMaximumSize(new java.awt.Dimension(137, 82));
         HomeBtn.setMinimumSize(new java.awt.Dimension(137, 82));
         HomeBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                HomeBtnMouseClicked(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 HomeBtnMousePressed(evt);
             }
@@ -314,7 +306,7 @@ public class AdminPage extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        ConfPanel.add(BookTickBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 560, 309, 90));
+        ConfPanel.add(BookTickBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 560, 309, 100));
 
         creatJournBtn.setBackground(new java.awt.Color(236, 227, 206));
         creatJournBtn.setMaximumSize(new java.awt.Dimension(137, 82));
@@ -364,7 +356,7 @@ public class AdminPage extends javax.swing.JFrame {
         });
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/icons8-driver-80.png"))); // NOI18N
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/icons8-bus-80.png"))); // NOI18N
         jLabel9.setText("Manage Buses");
 
         javax.swing.GroupLayout BusMgtBtnLayout = new javax.swing.GroupLayout(BusMgtBtn);
@@ -386,7 +378,7 @@ public class AdminPage extends javax.swing.JFrame {
 
         ConfPanel.add(BusMgtBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 350, 309, -1));
 
-        jPanel1.add(ConfPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 171, 300, 700));
+        jPanel1.add(ConfPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 171, 300, 1000));
 
         jDesktopPane.setBackground(new java.awt.Color(79, 111, 82));
         jDesktopPane.setFocusTraversalPolicyProvider(true);
@@ -396,27 +388,27 @@ public class AdminPage extends javax.swing.JFrame {
         jDesktopPane.setLayout(jDesktopPaneLayout);
         jDesktopPaneLayout.setHorizontalGroup(
             jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1010, Short.MAX_VALUE)
+            .addGap(0, 1600, Short.MAX_VALUE)
         );
         jDesktopPaneLayout.setVerticalGroup(
             jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 700, Short.MAX_VALUE)
+            .addGap(0, 990, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jDesktopPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 180, 1010, 700));
+        jPanel1.add(jDesktopPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 180, 1600, 990));
         jDesktopPane.getAccessibleContext().setAccessibleName("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1514, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1920, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(47, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -431,7 +423,6 @@ public class AdminPage extends javax.swing.JFrame {
         EmpMgtBtn.setBackground(defaultColor);
         creatJournBtn.setBackground(defaultColor);
         BookTickBtn.setBackground(defaultColor);
-        CustMgtBtn1.setBackground(defaultColor);
         DriverMgtBtn.setBackground(defaultColor);
         BusMgtBtn.setBackground(defaultColor);
     }//GEN-LAST:event_HomeBtnMousePressed
@@ -445,7 +436,6 @@ public class AdminPage extends javax.swing.JFrame {
         creatJournBtn.setBackground(defaultColor);
         BookTickBtn.setBackground(defaultColor);
         DriverMgtBtn.setBackground(defaultColor);
-        CustMgtBtn1.setBackground(defaultColor);
         BusMgtBtn.setBackground(defaultColor);
     }//GEN-LAST:event_CustMgtBtnMousePressed
 
@@ -456,7 +446,6 @@ public class AdminPage extends javax.swing.JFrame {
         EmpMgtBtn.setBackground(defaultColor);
         creatJournBtn.setBackground(defaultColor);
         BookTickBtn.setBackground(defaultColor);
-        CustMgtBtn1.setBackground(defaultColor);
         DriverMgtBtn.setBackground(clickedColor);
         BusMgtBtn.setBackground(defaultColor);
     }//GEN-LAST:event_DriverMgtBtnMousePressed
@@ -469,7 +458,6 @@ public class AdminPage extends javax.swing.JFrame {
         creatJournBtn.setBackground(defaultColor);
         BookTickBtn.setBackground(defaultColor);
         DriverMgtBtn.setBackground(defaultColor);
-        CustMgtBtn1.setBackground(defaultColor);
         BusMgtBtn.setBackground(defaultColor);
     }//GEN-LAST:event_EmpMgtBtnMousePressed
 
@@ -481,7 +469,6 @@ public class AdminPage extends javax.swing.JFrame {
         creatJournBtn.setBackground(defaultColor);
         BookTickBtn.setBackground(clickedColor);
         DriverMgtBtn.setBackground(defaultColor);
-        CustMgtBtn1.setBackground(defaultColor);
         BusMgtBtn.setBackground(defaultColor);
     }//GEN-LAST:event_BookTickBtnMousePressed
 
@@ -493,7 +480,6 @@ public class AdminPage extends javax.swing.JFrame {
         creatJournBtn.setBackground(clickedColor);
         BookTickBtn.setBackground(defaultColor);
         DriverMgtBtn.setBackground(defaultColor);
-        CustMgtBtn1.setBackground(defaultColor);
         BusMgtBtn.setBackground(defaultColor);
         
     }//GEN-LAST:event_creatJournBtnMousePressed
@@ -502,16 +488,20 @@ public class AdminPage extends javax.swing.JFrame {
         // TODO add your handling code here:
         EmployeeMgt empMgt = new EmployeeMgt();
         jDesktopPane.removeAll();
-//        jDesktopPane.repaint();
-//        jDesktopPane.revalidate();
+        jDesktopPane.repaint();
+        jDesktopPane.revalidate();
+        Dimension dm  = jDesktopPane.getSize();
+        empMgt.setSize(dm);
         jDesktopPane.add(empMgt).setVisible(true);
     }//GEN-LAST:event_EmpMgtBtnMouseClicked
 
     private void creatJournBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_creatJournBtnMouseClicked
         CreateJourney crj = new CreateJourney();
         jDesktopPane.removeAll();
-//        jDesktopPane.repaint();
-//        jDesktopPane.revalidate();
+        jDesktopPane.repaint();
+        jDesktopPane.revalidate();
+        Dimension dm  = jDesktopPane.getSize();
+        crj.setSize(dm);
         jDesktopPane.add(crj).setVisible(true);
         
         
@@ -521,8 +511,10 @@ public class AdminPage extends javax.swing.JFrame {
         // TODO add your handling code here:
             DriverMgt drivMgt = new DriverMgt();
         jDesktopPane.removeAll();
-//        jDesktopPane.repaint();
-//        jDesktopPane.revalidate();
+        jDesktopPane.repaint();
+        jDesktopPane.revalidate();
+        Dimension dm  = jDesktopPane.getSize();
+        drivMgt.setSize(dm);
         jDesktopPane.add(drivMgt).setVisible(true);
     }//GEN-LAST:event_DriverMgtBtnMouseClicked
 
@@ -530,8 +522,10 @@ public class AdminPage extends javax.swing.JFrame {
         // TODO add your handling code here:
           CustomerMgt custMgt = new CustomerMgt();
         jDesktopPane.removeAll();
-//        jDesktopPane.repaint();
-//        jDesktopPane.revalidate();
+        jDesktopPane.repaint();
+        jDesktopPane.revalidate();
+        Dimension dm  = jDesktopPane.getSize();
+        custMgt.setSize(dm);
         jDesktopPane.add(custMgt).setVisible(true);
         
     }//GEN-LAST:event_jLabel2MouseClicked
@@ -540,8 +534,10 @@ public class AdminPage extends javax.swing.JFrame {
 //         TODO add your handling code here:
         CustomerMgt custMgt = new CustomerMgt();
         jDesktopPane.removeAll();
-//        jDesktopPane.repaint();
-//        jDesktopPane.revalidate();
+        jDesktopPane.repaint();
+        jDesktopPane.revalidate();
+        Dimension dm  = jDesktopPane.getSize();
+        custMgt.setSize(dm);
         jDesktopPane.add(custMgt).setVisible(true);
         
     }//GEN-LAST:event_CustMgtBtnMouseClicked
@@ -554,53 +550,31 @@ public class AdminPage extends javax.swing.JFrame {
         creatJournBtn.setBackground(defaultColor);
         BookTickBtn.setBackground(defaultColor);
         DriverMgtBtn.setBackground(defaultColor);
-        CustMgtBtn1.setBackground(defaultColor);
         BusMgtBtn.setBackground(defaultColor);
     }//GEN-LAST:event_jLabel2MousePressed
-
-    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel8MouseClicked
-
-    private void jLabel8MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel8MousePressed
-
-    private void CustMgtBtn1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CustMgtBtn1MouseClicked
-        // TODO add your handling code here:
-         CustMgtBtn1.setBackground(clickedColor);
-        HomeBtn.setBackground(defaultColor);
-        EmpMgtBtn.setBackground(defaultColor);
-        creatJournBtn.setBackground(defaultColor);
-        BookTickBtn.setBackground(defaultColor);
-        DriverMgtBtn.setBackground(defaultColor);
-        BusMgtBtn.setBackground(defaultColor);
-        
-    }//GEN-LAST:event_CustMgtBtn1MouseClicked
-
-    private void CustMgtBtn1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CustMgtBtn1MousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_CustMgtBtn1MousePressed
 
     private void BusMgtBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BusMgtBtnMouseClicked
         // TODO add your handling code here:
          BusMgt busMgt = new BusMgt();
         jDesktopPane.removeAll();
-//        jDesktopPane.repaint();
-//        jDesktopPane.revalidate();
+        
+        jDesktopPane.repaint();
+        jDesktopPane.revalidate();
+        Dimension dm  = jDesktopPane.getSize();
+        busMgt.setSize(dm);
         jDesktopPane.add(busMgt).setVisible(true);
         
     }//GEN-LAST:event_BusMgtBtnMouseClicked
 
     private void BusMgtBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BusMgtBtnMousePressed
         // TODO add your handling code here:
-         CustMgtBtn1.setBackground(defaultColor);
         HomeBtn.setBackground(defaultColor);
         EmpMgtBtn.setBackground(defaultColor);
         creatJournBtn.setBackground(defaultColor);
         BookTickBtn.setBackground(defaultColor);
         DriverMgtBtn.setBackground(defaultColor);
         BusMgtBtn.setBackground(clickedColor);
+      
        
     }//GEN-LAST:event_BusMgtBtnMousePressed
 
@@ -608,10 +582,41 @@ public class AdminPage extends javax.swing.JFrame {
         // TODO add your handling code here:
          BookTicket bookticket = new BookTicket();
         jDesktopPane.removeAll();
-//        jDesktopPane.repaint();
-//        jDesktopPane.revalidate();
+        jDesktopPane.removeAll();
+        jDesktopPane.repaint();
+        jDesktopPane.revalidate();
+        Dimension dm  = jDesktopPane.getSize();
+        bookticket.setSize(dm);
         jDesktopPane.add(bookticket).setVisible(true);
     }//GEN-LAST:event_BookTickBtnMouseClicked
+
+    private void HomeBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HomeBtnMouseClicked
+        // TODO add your handling code here:
+         HomePage homePage = new HomePage();
+        jDesktopPane.removeAll();
+        Dimension dm  = jDesktopPane.getSize();
+        homePage.setSize(dm);
+        jDesktopPane.add(homePage).setVisible(true);
+        
+    }//GEN-LAST:event_HomeBtnMouseClicked
+
+    private void logOutBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logOutBtnMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_logOutBtnMousePressed
+
+    private void logOutBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logOutBtnMouseClicked
+        // TODO add your handling code here:
+        int option = JOptionPane.showConfirmDialog(this, "Are you sure You want to EXit","Confirm",JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if(option == JOptionPane.YES_OPTION){
+                       
+            
+            JOptionPane.showMessageDialog(this, "Thank You for using the System","Good Byee", JOptionPane.INFORMATION_MESSAGE);
+            LoginPage loginPage = new LoginPage();
+            this.dispose();
+            loginPage.setVisible(true);            
+        }
+      
+    }//GEN-LAST:event_logOutBtnMouseClicked
 
     /**
      * @param args the command line arguments
@@ -653,13 +658,13 @@ public class AdminPage extends javax.swing.JFrame {
     private javax.swing.JPanel BusMgtBtn;
     private javax.swing.JPanel ConfPanel;
     private javax.swing.JPanel CustMgtBtn;
-    private javax.swing.JPanel CustMgtBtn1;
     private javax.swing.JPanel DriverMgtBtn;
     private javax.swing.JPanel EmpMgtBtn;
     private javax.swing.JPanel HomeBtn;
     private javax.swing.JPanel creatJournBtn;
     private javax.swing.JDesktopPane jDesktopPane;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -670,5 +675,6 @@ public class AdminPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel logOutBtn;
     // End of variables declaration//GEN-END:variables
 }

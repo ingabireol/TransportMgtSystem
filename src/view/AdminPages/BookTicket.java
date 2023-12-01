@@ -35,6 +35,7 @@ public class BookTicket extends javax.swing.JInternalFrame {
         ticketIdTxt.setText(dao.generate_custId());
         JourneyDao jourdao = new JourneyDao();
         List<Journey> journeys = jourdao.retrieveJourney();
+        journeyCombo.setSelectedIndex(-1);
         for(Journey thejourney  : journeys){
             journeyCombo.addItem(thejourney.getJourney_id());              
         }
@@ -42,6 +43,7 @@ public class BookTicket extends javax.swing.JInternalFrame {
         setUneditable();
         addTableColumnsHeaderTIcket();
         addTableRowDataTicket();
+        
     }
     private void addTableColumnsHeaderTIcket(){ 
         tableModelTIcket.addColumn("TicketId"); 
@@ -56,6 +58,22 @@ public class BookTicket extends javax.swing.JInternalFrame {
   
         TIcketTable.setModel(tableModelTIcket);
     }
+    private void resetFields(){
+     custIdTxt.setText("");
+        fnameTxt.setText("");
+        lnameTxt.setText("");
+        destinationTxt.setText("");
+        sourceTxt.setText("");
+        dateTxt.setDate(null);
+        priceTxt.setText("");
+        departureTxt.setText("");
+        arrivalTimeTxt.setText("");      
+        journIdtxt.setText("");
+        journeyCombo.setSelectedIndex(-1);
+        TicketDao dao = new TicketDao();
+        ticketIdTxt.setText(dao.generate_custId());
+        bookTicketBtn.setEnabled(true);
+}
     private void addTableRowDataTicket(){
         tableModelTIcket.setRowCount(0);
         TicketDao ticketdao = new TicketDao();
@@ -157,8 +175,8 @@ public class BookTicket extends javax.swing.JInternalFrame {
         bookTicketBtn = new javax.swing.JButton();
         deleteBtn = new javax.swing.JButton();
         updateBtn = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jTextField7 = new javax.swing.JTextField();
+        searchJournBtn = new javax.swing.JButton();
+        searchIdTxt = new javax.swing.JTextField();
         dateTxt = new com.toedter.calendar.JDateChooser();
         jLabel1 = new javax.swing.JLabel();
         custIdTxt = new javax.swing.JTextField();
@@ -177,40 +195,44 @@ public class BookTicket extends javax.swing.JInternalFrame {
         searchCustomerBtn = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 235, 216));
+        setPreferredSize(new java.awt.Dimension(1020, 700));
+        setRequestFocusEnabled(false);
+
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(1600, 990));
 
         jPanel1.setBackground(new java.awt.Color(255, 235, 216));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setText("Journey Date");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, -1, -1));
 
         jLabel4.setText("Destination ");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, -1, -1));
 
         jLabel5.setText("Source");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, -1, -1));
 
         jLabel7.setText("Ticket ID :  ");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
         jLabel8.setText("Price");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, -1, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, -1, 20));
 
         jLabel9.setText("Departure Time");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 510, -1, -1));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 500, -1, -1));
 
         jLabel11.setText("Arrival Time: ");
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 560, -1, -1));
-        jPanel1.add(sourceTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 340, 130, -1));
-        jPanel1.add(destinationTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 300, 130, -1));
-        jPanel1.add(priceTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 450, 130, -1));
+        jPanel1.add(sourceTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 330, 130, -1));
+        jPanel1.add(destinationTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 290, 130, -1));
+        jPanel1.add(priceTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 450, 130, 30));
 
         departureTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 departureTxtActionPerformed(evt);
             }
         });
-        jPanel1.add(departureTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 510, 130, -1));
+        jPanel1.add(departureTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 500, 130, -1));
         jPanel1.add(arrivalTimeTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 550, 130, -1));
 
         JourneyTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -231,7 +253,7 @@ public class BookTicket extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(JourneyTable);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 390, 480, 280));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 450, 730, 260));
 
         bookTicketBtn.setText("Book");
         bookTicketBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -239,42 +261,57 @@ public class BookTicket extends javax.swing.JInternalFrame {
                 bookTicketBtnActionPerformed(evt);
             }
         });
-        jPanel1.add(bookTicketBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 660, -1, -1));
+        jPanel1.add(bookTicketBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 650, -1, -1));
 
         deleteBtn.setText("Delete");
-        jPanel1.add(deleteBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 660, -1, -1));
+        deleteBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteBtnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(deleteBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 650, -1, -1));
 
         updateBtn.setText("Update");
-        jPanel1.add(updateBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 660, -1, -1));
+        updateBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateBtnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(updateBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 650, -1, -1));
 
-        jButton4.setText("Search");
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 330, -1, -1));
-        jPanel1.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 330, 118, -1));
-        jPanel1.add(dateTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 410, 130, -1));
+        searchJournBtn.setText("Search");
+        searchJournBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchJournBtnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(searchJournBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 370, -1, -1));
+        jPanel1.add(searchIdTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 370, 118, -1));
+        jPanel1.add(dateTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 380, 130, -1));
 
         jLabel1.setText("Customer Id :");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
 
         custIdTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 custIdTxtActionPerformed(evt);
             }
         });
-        jPanel1.add(custIdTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, 130, -1));
+        jPanel1.add(custIdTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 90, 130, -1));
 
         jLabel2.setText("Journey Id");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, -1, -1));
         jPanel1.add(journIdtxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 250, 110, 30));
 
         jLabel6.setText("First Name :");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
 
         fnameTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 fnameTxtActionPerformed(evt);
             }
         });
-        jPanel1.add(fnameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 110, 130, -1));
+        jPanel1.add(fnameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 130, 130, -1));
 
         jLabel10.setText("Last Name :");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, -1));
@@ -284,14 +321,21 @@ public class BookTicket extends javax.swing.JInternalFrame {
                 lnameTxtActionPerformed(evt);
             }
         });
-        jPanel1.add(lnameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, 130, -1));
+        jPanel1.add(lnameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 170, 130, -1));
 
         journeyCombo.setMaximumRowCount(20);
+        journeyCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "select" }));
+        journeyCombo.setToolTipText("");
+        journeyCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                journeyComboActionPerformed(evt);
+            }
+        });
         jPanel1.add(journeyCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 250, 130, -1));
         jPanel1.add(ticketIdTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 30, 150, 20));
 
         jLabel13.setText("Search Journey Here");
-        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 300, -1, -1));
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 320, -1, -1));
 
         TIcketTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -314,7 +358,7 @@ public class BookTicket extends javax.swing.JInternalFrame {
         });
         jScrollPane3.setViewportView(TIcketTable);
 
-        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 10, 480, 280));
+        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 80, 700, 210));
 
         resetBtn.setText("Reset");
         resetBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -322,7 +366,7 @@ public class BookTicket extends javax.swing.JInternalFrame {
                 resetBtnActionPerformed(evt);
             }
         });
-        jPanel1.add(resetBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 660, 70, -1));
+        jPanel1.add(resetBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 650, 70, -1));
 
         searchCustomerBtn.setText("Search");
         searchCustomerBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -330,7 +374,7 @@ public class BookTicket extends javax.swing.JInternalFrame {
                 searchCustomerBtnActionPerformed(evt);
             }
         });
-        jPanel1.add(searchCustomerBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 70, -1, -1));
+        jPanel1.add(searchCustomerBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 90, -1, -1));
 
         jScrollPane1.setViewportView(jPanel1);
 
@@ -338,11 +382,11 @@ public class BookTicket extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1186, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1268, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 718, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1033, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -388,6 +432,7 @@ try{
 
     private void TIcketTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TIcketTableMouseClicked
         // TODO add your handling code here:
+        resetFields();
         TableModel model = TIcketTable.getModel();
         int i = TIcketTable.getSelectedRow();
         Customer cust = new Customer();
@@ -417,26 +462,13 @@ try{
         custIdTxt.setText(cust.getCust_id());
         fnameTxt.setText(cust.getCust_first_name());
         lnameTxt.setText(cust.getCust_last_name());
-                                             
+        bookTicketBtn.setEnabled(false);
         
     }//GEN-LAST:event_TIcketTableMouseClicked
 
     private void resetBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetBtnActionPerformed
         // TODO add your handling code here:
-        custIdTxt.setText("");
-        fnameTxt.setText("");
-        lnameTxt.setText("");
-        destinationTxt.setText("");
-        sourceTxt.setText("");
-        dateTxt.setDate(null);
-        priceTxt.setText("");
-        departureTxt.setText("");
-        arrivalTimeTxt.setText("");      
-        journIdtxt.setText("");
-        journeyCombo.setSelectedIndex(-1);
-        TicketDao dao = new TicketDao();
-        ticketIdTxt.setText(dao.generate_custId());
-        
+       resetFields();        
     }//GEN-LAST:event_resetBtnActionPerformed
 
     private void searchCustomerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchCustomerBtnActionPerformed
@@ -487,6 +519,134 @@ try{
         }
     }//GEN-LAST:event_bookTicketBtnActionPerformed
 
+    private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
+        // TODO add your handling code here:
+        TicketDao ticketdao = new TicketDao();
+        if(ticketIdTxt.getText().compareTo(ticketdao.generate_custId()) == 0){
+            JOptionPane.showMessageDialog(this, "Please first search the ticket", "Empty Feild", JOptionPane.ERROR_MESSAGE);
+        }
+        if(fnameTxt.getText().trim().isEmpty() || lnameTxt.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Please first search the ticket", "Empty Feild", JOptionPane.ERROR_MESSAGE);
+        }
+        else if(departureTxt.getText().trim().isEmpty() || destinationTxt.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Please first search the ticket", "Empty Feild", JOptionPane.ERROR_MESSAGE);
+        }
+        else{
+            Ticket ticket = new Ticket();
+            ticket.setTicketId(ticketIdTxt.getText());
+            String feedback = ticketdao.deleteTicket(ticket);
+            JOptionPane.showMessageDialog(this, feedback, "Result", JOptionPane.INFORMATION_MESSAGE);
+            resetBtnActionPerformed(evt);
+            addTableRowDataTicket();
+        }
+    }//GEN-LAST:event_deleteBtnActionPerformed
+
+    private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
+        // TODO add your handling code here:
+        if(fnameTxt.getText().trim().isEmpty() || lnameTxt.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Please first search for the Customer", "Empty Feild", JOptionPane.ERROR_MESSAGE);
+        }
+        else if(departureTxt.getText().trim().isEmpty() || destinationTxt.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(this, "First Choose the Journey", "Empty Feild", JOptionPane.ERROR_MESSAGE);
+        }
+        else{
+            TicketDao ticketdao = new TicketDao();
+            Ticket ticket = new Ticket();
+            ticket.setTicketId(ticketIdTxt.getText());
+            ticket.setCustomer_id(custIdTxt.getText());
+            ticket.setJourneyId(journIdtxt.getText());
+            String feedback = ticketdao.UpdateTicket(ticket);
+            JOptionPane.showMessageDialog(this, feedback, "Result", JOptionPane.INFORMATION_MESSAGE);
+            resetBtnActionPerformed(evt);
+            addTableRowDataTicket();
+        }
+    }//GEN-LAST:event_updateBtnActionPerformed
+
+    private void searchJournBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchJournBtnActionPerformed
+        // TODO add your handling code here:
+        if(searchIdTxt.getText().trim().isEmpty())
+        {
+            JOptionPane.showMessageDialog(this, "Id cant be empty", "Empty Feild", JOptionPane.ERROR_MESSAGE);
+        }
+        else if(searchIdTxt.getText().length() == 5 && searchIdTxt.getText().contains("JN")){
+            Journey journey = new Journey();
+//            Journey journey1 = new Journey();
+
+            JourneyDao jourdao = new JourneyDao();
+            journey.setJourney_id(searchIdTxt.getText());
+            journey = jourdao.searchJourney(journey);
+            if(journey == null){
+                System.out.println(searchIdTxt.getText());
+                JOptionPane.showMessageDialog(this, "Id does not Exist", "Result", JOptionPane.INFORMATION_MESSAGE);
+            }
+            else
+            {
+                journIdtxt.setText(journey.getJourney_id());
+                destinationTxt.setText(journey.getJour_dest_name());
+                sourceTxt.setText(journey.getJour_source_name());
+                departureTxt.setText(journey.getJour_departure_time());
+                journeyCombo.setSelectedItem(journey.getJourney_id());
+                arrivalTimeTxt.setText(journey.getJour_arrival_time());
+                String date = journey.getJourney_date();                
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+             try{   
+                Date todate = sdf.parse(date);
+//                System.out.println(date);
+//                System.out.println(sdf.format(todate));
+                dateTxt.setDate(todate);}catch(Exception ex){ex.printStackTrace();}
+                priceTxt.setText(journey.getPrice().toString());
+                
+            }
+        }
+        
+    }//GEN-LAST:event_searchJournBtnActionPerformed
+
+    private void journeyComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_journeyComboActionPerformed
+        // TODO add your handling code here:
+        Journey journey = new Journey();
+        
+     
+        if(journeyCombo.getSelectedItem() ==null){
+            return;
+        }
+        else if(journeyCombo.getSelectedItem() != null){
+            
+            if(journeyCombo.getSelectedItem().toString().equalsIgnoreCase("select")){
+            
+            journIdtxt.setText("");
+            destinationTxt.setText("");
+            sourceTxt.setText("");
+            departureTxt.setText("");
+            journeyCombo.setSelectedItem("");
+            arrivalTimeTxt.setText("");
+            dateTxt.setDate(null);
+            priceTxt.setText("");
+            
+        }
+        
+        journey.setJourney_id(journeyCombo.getSelectedItem().toString());
+        
+        JourneyDao dao = new JourneyDao();
+        journey = dao.searchJourney(journey);
+        if(journey != null){
+        journIdtxt.setText(journey.getJourney_id());
+                destinationTxt.setText(journey.getJour_dest_name());
+                sourceTxt.setText(journey.getJour_source_name());
+                departureTxt.setText(journey.getJour_departure_time());
+                journeyCombo.setSelectedItem(journey.getJourney_id());
+                arrivalTimeTxt.setText(journey.getJour_arrival_time());
+                String date = journey.getJourney_date();                
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+             try{   
+                Date todate = sdf.parse(date);
+//                System.out.println(date);
+//                System.out.println(sdf.format(todate));
+                dateTxt.setDate(todate);}catch(Exception ex){ex.printStackTrace();}
+                priceTxt.setText(journey.getPrice().toString());
+        }
+       }
+    }//GEN-LAST:event_journeyComboActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable JourneyTable;
@@ -499,7 +659,6 @@ try{
     private javax.swing.JTextField departureTxt;
     private javax.swing.JTextField destinationTxt;
     private javax.swing.JTextField fnameTxt;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -516,13 +675,14 @@ try{
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextField jTextField7;
     private javax.swing.JLabel journIdtxt;
     private javax.swing.JComboBox<String> journeyCombo;
     private javax.swing.JTextField lnameTxt;
     private javax.swing.JTextField priceTxt;
     private javax.swing.JButton resetBtn;
     private javax.swing.JButton searchCustomerBtn;
+    private javax.swing.JTextField searchIdTxt;
+    private javax.swing.JButton searchJournBtn;
     private javax.swing.JTextField sourceTxt;
     private javax.swing.JLabel ticketIdTxt;
     private javax.swing.JButton updateBtn;

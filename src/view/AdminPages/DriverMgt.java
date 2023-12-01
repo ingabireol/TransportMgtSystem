@@ -155,7 +155,7 @@ public class DriverMgt extends javax.swing.JInternalFrame {
         ));
         jScrollPane2.setViewportView(DriverTable);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 70, 600, 450));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 70, 880, 460));
 
         registerBtn.setText("Register");
         registerBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -208,7 +208,7 @@ public class DriverMgt extends javax.swing.JInternalFrame {
 
         jScrollPane1.setViewportView(jPanel1);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1186, 722));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1580, 950));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
